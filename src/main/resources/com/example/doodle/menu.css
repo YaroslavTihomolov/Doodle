@@ -1,0 +1,40 @@
+.root {
+    -fx-background-image: url("Doodle_background.png");
+    -fx-background-size: cover;
+}
+
+.button {
+    -fx-background-color: transparent;
+    -fx-background-size: contain;
+    -fx-shape: "M 50 0 L 0 50 L 50 100 L 100 50 Z";
+}
+
+#playButton{
+    -fx-graphic: url("playButton.png");
+}
+
+#playAgain{
+    -fx-graphic: url("DoodleJumpPlayAgain.png");
+}
+
+#menu{
+    -fx-graphic: url("DoodleJumpMenuButton.png");
+}
+
+@font-face {
+    src: url("Marker Felt.ttf");
+    font-family: "Marker Felt";
+    src: url("comic-sans.ttf");
+    font-family: "Comic Sans";
+}
+
+.label {
+    -fx-font-family: "Comic Sans MS", cursive;
+    -fx-font-size: 56px;
+}
+
+
+#titleLabel {
+
+
+}
