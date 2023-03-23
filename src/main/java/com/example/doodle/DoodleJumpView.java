@@ -99,6 +99,5 @@ public class DoodleJumpView {
         ((Pane)root).getChildren().add(score);
         ((Pane)root).getChildren().add(resultScore);
         stage.setScene(scene);
-        stage.show();
     }
 }

@@ -27,8 +27,7 @@ public class ObjectInteraction {
                     val = interactionPlayer(platform, player);
                     if (val != -1.0) {
                         //player.changeScoreStatus(player.getCurPlatformNum() != platform.getPlatformNum());
-                        if (player.getCurPlatformNum() != platform.getPlatformNum()) {
-                            System.out.println((player.curPlatformY + "   " + platform.position.y()));
+                        if (player.getCurPlatformNum() != platform.getPlatformNum() && (player.curPlatformY - platform.position.y() > 0)) {
                             player.addScore((long) (player.curPlatformY - platform.position.y()));
                         }
                         player.setCurPlatformNum(platform.getPlatformNum());

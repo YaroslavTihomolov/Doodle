@@ -33,7 +33,7 @@ public class PlatformsQueue {
     }
 
     public void repositionPlatforms(int sign, Player player) {
-        if (!player.playerFalls()) {
+        if (!player.playerFalls() && Platform.distanceInFrame() > 0) {
             player.addScore((long) Platform.distanceInFrame());
         }
 

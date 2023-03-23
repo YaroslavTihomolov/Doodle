@@ -37,11 +37,12 @@
             <Image url="@../../../../../../../../Users/я/Pictures/DoodleJumpBlackHole.png" />
          </image>
       </ImageView>
-      <Polygon fx:id="lightFromShip" fill="#eadc96" layoutX="365.0" layoutY="102.0" opacity="0.38" points="-53.800018310546875, 92.19999694824219, 55.800018310546875, 92.19999694824219, -0.800018310546875, -25.399993896484375" stroke="BLACK" strokeType="INSIDE" />
+      <Polygon fx:id="lightFromShip" fill="#e8bd97" layoutX="366.0" layoutY="85.0" opacity="0.43" points="-53.800018310546875, 92.19999694824219, 55.800018310546875, 92.19999694824219, -0.800018310546875, -25.399993896484375" stroke="#d17171" strokeType="INSIDE" strokeWidth="0.0" />
       <ImageView fx:id="spaceShip" fitHeight="88.0" fitWidth="155.0" layoutX="290.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../../../Users/я/Pictures/DoodleJumpShip.png" />
          </image>
       </ImageView>
+      <Button fx:id="scoresButton" layoutX="248.0" layoutY="518.0" mnemonicParsing="false" onAction="#scoreButton" prefHeight="108.0" prefWidth="122.0" />
    </children>
 </AnchorPane>

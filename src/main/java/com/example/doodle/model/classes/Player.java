@@ -115,9 +115,7 @@ public class Player {
         return curPosition.x() + leftLegOffsetLPlayer;
     }
 
-    public static float getLegPosPlayer(float curPos) {
-        return curPos + LegOffsetPlayer;
-    }
+    public static float getLegPosPlayer(float curPos) { return curPos + LegOffsetPlayer; }
 
     public float getHeadPosPlayer() { return curPosition.y() + 6; }
 

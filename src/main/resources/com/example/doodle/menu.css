@@ -13,6 +13,10 @@
     -fx-graphic: url("playButton.png");
 }
 
+#scoreButton{
+    -fx-graphic: url("DoodleJumpScore.png");
+}
+
 #playAgain{
     -fx-graphic: url("DoodleJumpPlayAgain.png");
 }
@@ -30,11 +34,25 @@
 
 .label {
     -fx-font-family: "Comic Sans MS", cursive;
-    -fx-font-size: 56px;
 }
 
 
 #titleLabel {
+    -fx-font-size: 56px;
+}
 
+#titleLabel1 {
+    -fx-font-size: 56px;
+}
 
+#titleLabel2{
+    -fx-font-size: 56px;
+}
+
+#scoresButton{
+    -fx-graphic: url("DoodleJumpScore.png");
+}
+
+#scoresMenu{
+    -fx-graphic: url("DoodleJumpMenuButton.png");
 }
