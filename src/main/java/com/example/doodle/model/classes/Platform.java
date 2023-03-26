@@ -10,8 +10,6 @@ public class Platform {
     public static final int width = 90;
     public static final int height = 23;
     public Position position = new Position();
-    private static final int max = 5;
-    private static final int min = 1;
     public static final int fieldWidth = 500;
     public static final int fieldHeight = 675;
     public static final float platformWidthDiapason = fieldWidth - width;
@@ -27,11 +25,47 @@ public class Platform {
 
     private final long platformNum;
 
-    public Platform(float cur_height, float weight) {
+    private boolean hasSpring = false;
+
+    public Spring spring;
+
+    public boolean getSpringStatus() { return hasSpring; }
+
+    public class Spring {
+        public static final Image springImage = new Image("C:\\4 семестр\\Doodle\\src\\main\\resources\\com\\example\\doodle\\DoodleJumpSpring.png");
+        public static final Image springLongImage = new Image("C:\\4 семестр\\Doodle\\src\\main\\resources\\com\\example\\doodle\\DoodleJumpLongSpring.png");
+        public static final float springWidth = 25;
+        public static final float springUpPlatform = 12;
+
+        private boolean hasJumped = false;
+
+        public ImageView springView = null;
+        private final float xPos;
+
+        Spring(float yPos) {
+            hasSpring = true;
+            this.xPos = yPos;
+        }
+
+        public void setHasJumped(boolean hasJumped) { this.hasJumped = hasJumped; }
+
+        public boolean isHasJumped() { return hasJumped; }
+
+        public float getXPos() {
+            return xPos;
+        }
+    }
+
+    public Platform(float cur_height, float weight, boolean isSpring) {
         position.setX(cur_height);
         position.setY(weight);
         platformCount++;
         platformNum = platformCount;
+        Random rand = new Random();
+        if (isSpring) {
+            hasSpring = true;
+            spring = new Spring(cur_height + rand.nextFloat(Platform.width - Spring.springWidth));
+        }
     }
 
     public long getPlatformNum() { return platformNum; }
@@ -54,36 +88,17 @@ public class Platform {
         }
     }
 
-    public static Platform generatePlatform(int offset) {
+
+    public static Platform generatePlatform() {
         Random rand = new Random();
-        float yPos = 330 + rand.nextFloat(Player.jumpHeight) - Player.jumpHeight * offset;
+        float yPos = curMaxY - rand.nextFloat(Player.jumpHeight - height) - height;
         if (curMaxY > yPos) {
             curMaxY = yPos;
         }
-        return new Platform(rand.nextFloat(Platform.platformWidthDiapason), yPos);
-    }
-
-    private static Platform generateFirstInBoxPlatform() {
-        Random rand = new Random();
-        float yPos = curMaxY - rand.nextFloat(Player.jumpHeight);
-        if (curMaxY > yPos) {
-            curMaxY = yPos;
+        if (rand.nextFloat(1) < 0.1) {
+            return new Platform(rand.nextFloat(Platform.platformWidthDiapason), yPos, true);
+        } else {
+            return new Platform(rand.nextFloat(Platform.platformWidthDiapason), yPos, false);
         }
-        return new Platform(rand.nextFloat(Platform.platformWidthDiapason), yPos);
     }
-
-    public static Platform[] generatePlatformBox(int offset) {
-        Random rand = new Random();
-        int platformCount = rand.nextInt((max - min) + 1) + min;
-        Platform[] platformsBox = new Platform[platformCount];
-        for (int i = 0; i < platformCount; i++) {
-            if (i == platformCount - 1) {
-                platformsBox[i] = generateFirstInBoxPlatform();
-            } else {
-                platformsBox[i] = generateFirstInBoxPlatform();
-            }
-        }
-        return platformsBox;
-    }
-
 }

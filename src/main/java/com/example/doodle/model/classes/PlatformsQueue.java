@@ -1,11 +1,11 @@
 package com.example.doodle.model.classes;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class PlatformsQueue {
-    public final Queue<Platform[]> queue = new LinkedList<>();
+    public final List<Platform> platformList = new ArrayList<>();
 
     public PlatformsQueue() {
         Platform.curMaxY = Platform.fieldHeight;
@@ -13,22 +13,13 @@ public class PlatformsQueue {
     }
 
     private void checkContentStart() {
-        Platform[] platformsBox = new Platform[3];
-        platformsBox[0] = new Platform(StartData.startXPos, Player.getLegPosPlayer(StartData.startYPos));
-        for (int i = 0; i < 3; i++) {
-            if (i != 0) {
-                platformsBox[i] = Platform.generatePlatform(0);
-            }
-        }
-        queue.add(platformsBox);
-        while (queue.size() < 4) {
-            queue.add(Platform.generatePlatformBox(queue.size()));
-        }
+        platformList.add(new Platform(StartData.startXPos, Player.getLegPosPlayer(StartData.startYPos), false));
+        checkContent();
     }
 
     public void checkContent() {
-        while (queue.size() < 4) {
-            queue.add(Platform.generatePlatformBox(queue.size()));
+        while (Platform.curMaxY > -Player.jumpHeight * 4) {
+            platformList.add(Platform.generatePlatform());
         }
     }
 
@@ -39,29 +30,18 @@ public class PlatformsQueue {
 
         Platform.curMaxY += Platform.distanceInFrame();
 
-        for (var platformBox : queue) {
-            for (var platform : platformBox) {
-                platform.changePosition(sign);
-            }
+        for (var platform : platformList) {
+            platform.changePosition(sign);
         }
         Platform.changeVelocityY();
     }
 
-    public boolean deletePlatformBox(int fieldHeight) {
-        var platformBox = queue.peek();
-        assert platformBox != null;
-        for (var platform : platformBox) {
-            if (platform.position.y() < fieldHeight) {
-                return false;
-            }
-        }
-        return true;
+    public void deletePlatform() {
+        this.platformList.removeIf(platform -> platform.position.y() > StartData.fieldHeight);
     }
 
-    public boolean checkPlatformOnField(Player player, PlatformsQueue platformsQueue) {
-        var platformBox = platformsQueue.queue.peek();
-        assert platformBox != null;
-        for (var platform : platformBox) {
+    public boolean checkPlatformOnField(Player player) {
+        for (var platform : platformList) {
             if (platform.position.y() + 50 > 0) {
                 return false;
             }

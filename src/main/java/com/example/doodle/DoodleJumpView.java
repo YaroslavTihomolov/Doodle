@@ -15,6 +15,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class DoodleJumpView {
     private Scene scene;
@@ -22,13 +23,13 @@ public class DoodleJumpView {
     Parent root;
 
     private ImageView doodlerView;
-    private Text score;
+    private final Text score;
 
     private long curScore = 0;
 
     public DoodleJumpView(Stage primaryStage) {
         try {
-            root = FXMLLoader.load(getClass().getResource("field.fxml"));
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("field.fxml")));
             scene = new Scene(root);
             stage = primaryStage;
             score = new Text(25, 35, "0");
@@ -48,10 +49,7 @@ public class DoodleJumpView {
         ((Pane)root).getChildren().add(doodlerView);
     }
 
-    public void draw(Player player, PlatformsQueue platformsQueue, boolean gameStatus, long newScore) {
-        /*if (!gameStatus) {
-            stage.close();
-        }*/
+    public void draw(Player player, PlatformsQueue platformsQueue, long newScore) {
         scene.setOnKeyPressed(event -> {
             KeyCode keyCode = event.getCode();
             if (keyCode == KeyCode.LEFT) {
@@ -78,21 +76,32 @@ public class DoodleJumpView {
     }
 
     private void drawPlatformsQueue(PlatformsQueue platformsQueue) {
-        for (var platformBox : platformsQueue.queue) {
-            for (Platform platform : platformBox) {
-                if (platform.platformView == null) {
-                    platform.platformView = new ImageView(Platform.platformImage);
-                    ((Pane)root).getChildren().add(platform.platformView);
-                }
-                platform.platformView.setX(platform.position.x());
-                platform.platformView.setY(platform.position.y());
-                platform.platformView.toBack();
+        for (var platform : platformsQueue.platformList) {
+            if (platform.platformView == null) {
+                platform.platformView = new ImageView(Platform.platformImage);
+                ((Pane)root).getChildren().add(platform.platformView);
             }
+            if (platform.getSpringStatus()) {
+                if (platform.spring.springView == null) {
+                    platform.spring.springView = new ImageView(Platform.Spring.springImage);
+                    ((Pane)root).getChildren().add(platform.spring.springView);
+                }
+                if (platform.spring.isHasJumped()) {
+                    platform.spring.springView.setImage(Platform.Spring.springLongImage);
+                    platform.spring.springView.setY(platform.position.y() - 30);
+                } else {
+                    platform.spring.springView.setY(platform.position.y() - Platform.Spring.springUpPlatform);
+                }
+                platform.spring.springView.setX(platform.spring.getXPos());
+            }
+            platform.platformView.setX(platform.position.x());
+            platform.platformView.setY(platform.position.y());
+            platform.platformView.toBack();
         }
     }
 
     public void loose() throws IOException {
-        root = FXMLLoader.load(getClass().getResource("looseMenu.fxml"));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("looseMenu.fxml")));
         scene = new Scene(root);
         Text resultScore = new Text(150, 280, "your score: " + score.getText());
         resultScore.setFont(new Font("Comic Sans MS", 25));

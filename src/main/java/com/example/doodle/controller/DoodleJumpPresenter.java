@@ -12,7 +12,6 @@ import java.io.*;
 public class DoodleJumpPresenter {
     private final DoodleJumpModel model;
     private final DoodleJumpView view;
-    private long score;
 
     DoodleJumpPresenter(DoodleJumpModel modelReference, DoodleJumpView viewReference) {
         model = modelReference;
@@ -32,7 +31,7 @@ public class DoodleJumpPresenter {
                 if (!model.update(player, platformsQueue)) {
                     gameStatus = false;
                 }
-                view.draw(player, platformsQueue, gameStatus, player.getScore());
+                view.draw(player, platformsQueue, player.getScore());
                 if (!gameStatus) {
                     super.stop();
                     try {
@@ -42,7 +41,7 @@ public class DoodleJumpPresenter {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                    platformsQueue.queue.remove();
+                    platformsQueue.platformList.clear();
                 }
             }
         };

@@ -13,8 +13,6 @@ public class Player {
     public static final float jumpHeight = (-gravity_const) * jumpHalfTime * jumpHalfTime / 2 - 5;
     public static final float rightLegOffsetRPlayer = 57;
     public static final float leftLegOffsetRPlayer = 20;
-    public static final float rightLegOffsetLPlayer = 69;
-    public static final float leftLegOffsetLPlayer = 32;
     public static final float LegOffsetPlayer = 75;
     public static final Image rightDoodlerImage = new Image("C:\\Users\\я\\Pictures\\Doodler_right.png");
     public static final Image leftDoodlerImage = new Image("C:\\Users\\я\\Pictures\\Doodler_left.png");
@@ -37,14 +35,6 @@ public class Player {
 
     public Player() {
         curPosition = new Position(220, 530);
-    }
-
-    public long getCurPlatform() {
-        return curPlatformNum;
-    }
-
-    public void setGetCurPlatform(int curPlatformNum) {
-        this.curPlatformNum = curPlatformNum;
     }
 
     private void changeVelocityY() {
@@ -73,6 +63,8 @@ public class Player {
     public void setDefaultVelocity() {
         curYVelocity = base_up_velocity;
     }
+
+    public void setSpringVelocity() { curYVelocity = base_up_velocity * 1.5f; }
 
     public void changeVelocityXR() {
         curXVelocity = base_left_right_velocity;
@@ -105,14 +97,6 @@ public class Player {
 
     public float getLeftLegPosRPlayer() {
         return curPosition.x() + leftLegOffsetRPlayer;
-    }
-
-    public float getRightLegPosLPlayer() {
-        return curPosition.x() + rightLegOffsetLPlayer;
-    }
-
-    public float getLeftLegPosLPlayer() {
-        return curPosition.x() + leftLegOffsetLPlayer;
     }
 
     public static float getLegPosPlayer(float curPos) { return curPos + LegOffsetPlayer; }

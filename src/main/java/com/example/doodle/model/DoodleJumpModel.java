@@ -30,15 +30,10 @@ public class DoodleJumpModel {
         player.changePositionY();
         player.posTransfer();
         if (player.playerFalls()) {
-            Float upHeight = ObjectInteraction.interactionCheck(player, platformsQueue);
-            if (upHeight != -1.0) {
-                player.setDefaultVelocity();
-            }
+            ObjectInteraction.interactionCheck(player, platformsQueue);
         }
-        if (platformsQueue.deletePlatformBox(StartData.fieldHeight)) {
-            platformsQueue.queue.remove();
-            platformsQueue.checkContent();
-        }
+        platformsQueue.deletePlatform();
+        platformsQueue.checkContent();
     }
 
     private void gameStatusOn(Player player, PlatformsQueue platformsQueue) {
@@ -54,7 +49,7 @@ public class DoodleJumpModel {
         platformsQueue.repositionPlatforms(platformDown, player);
         player.changePositionY();
         player.setVelocity(400);
-        return !platformsQueue.checkPlatformOnField(player, platformsQueue);
+        return !platformsQueue.checkPlatformOnField(player);
     }
 
     public boolean update(Player player, PlatformsQueue platformsQueue) {
