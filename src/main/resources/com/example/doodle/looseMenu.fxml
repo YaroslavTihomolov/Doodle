@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="500.0" stylesheets="@menu.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.doodle.controller.looseController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="500.0" stylesheets="@menu.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.doodle.view.fxmlcontrollers.looseController">
    <children>
       <Label fx:id="titleLabel2" layoutX="91.0" layoutY="149.0" rotate="-7.0" text="Game over !" textFill="#b15258" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7eaedc" height="60.0" opacity="0.31" stroke="BLACK" strokeType="INSIDE" width="500.0" />

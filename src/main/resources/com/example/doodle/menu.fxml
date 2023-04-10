@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="500.0" stylesheets="@menu.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.doodle.controller.MenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="500.0" stylesheets="@menu.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.doodle.view.fxmlcontrollers.MenuController">
    <children>
       <Button fx:id="playButton" layoutX="113.0" layoutY="228.0" mnemonicParsing="false" onAction="#startPlay" prefHeight="68.0" prefWidth="216.0">
          <graphic>
@@ -29,7 +29,7 @@
       </ImageView>
       <ImageView fx:id="doodler" fitHeight="99.0" fitWidth="100.0" layoutX="55.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../../Users/я/Pictures/Doodler_right.png" />
+            <Image url="@Doodler_right.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="282.0" layoutY="368.0" pickOnBounds="true" preserveRatio="true">

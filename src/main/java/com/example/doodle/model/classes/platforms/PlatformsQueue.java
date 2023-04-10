@@ -1,4 +1,8 @@
-package com.example.doodle.model.classes;
+package com.example.doodle.model.classes.platforms;
+
+import com.example.doodle.model.classes.Player;
+import com.example.doodle.model.classes.StartData;
+import com.example.doodle.model.classes.platforms.platformTypes.Platform;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,18 +12,18 @@ public class PlatformsQueue {
     public final List<Platform> platformList = new ArrayList<>();
 
     public PlatformsQueue() {
-        Platform.curMaxY = Platform.fieldHeight;
+        Platform.setDefaultSettings();
         checkContentStart();
     }
 
     private void checkContentStart() {
-        platformList.add(new Platform(StartData.startXPos, Player.getLegPosPlayer(StartData.startYPos), false));
+        platformList.add(new Platform(StartData.startXPos, Player.getLegPosPlayer(StartData.startYPos)));
         checkContent();
     }
 
     public void checkContent() {
         while (Platform.curMaxY > -Player.jumpHeight * 4) {
-            platformList.add(Platform.generatePlatform());
+            platformList.add(PlatformGenerator.generatePlatform());
         }
     }
 

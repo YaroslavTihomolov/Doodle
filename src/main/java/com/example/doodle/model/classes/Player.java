@@ -14,18 +14,20 @@ public class Player {
     public static final float rightLegOffsetRPlayer = 57;
     public static final float leftLegOffsetRPlayer = 20;
     public static final float LegOffsetPlayer = 75;
-    public static final Image rightDoodlerImage = new Image("C:\\Users\\я\\Pictures\\Doodler_right.png");
-    public static final Image leftDoodlerImage = new Image("C:\\Users\\я\\Pictures\\Doodler_left.png");
+    public static final Image rightDoodlerImage = new Image("C:\\4 семестр\\Doodle\\src\\main\\resources\\com\\example\\doodle\\Doodler_right.png");
+    public static final Image leftDoodlerImage = new Image("C:\\4 семестр\\Doodle\\src\\main\\resources\\com\\example\\doodle\\Doodler_left.png");
 
+    private Image curImage = rightDoodlerImage;
     private long curPlatformNum = 0;
     private final Position curPosition;
+    private boolean interactionStatus = false;
+    private boolean springStatus = false;
 
     private long score = 0;
 
     public float curPlatformY = 675;
 
-    private float curXVelocity;
-    private float curYVelocity;
+    private float curXVelocity, curYVelocity;
 
     public long getCurPlatformNum() { return curPlatformNum; }
 
@@ -108,4 +110,25 @@ public class Player {
     }
 
     public void setYPos(float yPos) { curPosition.setY(yPos); }
+
+    public void updateVelocity() {
+        if (!interactionStatus)
+            return;
+        if (springStatus) {
+            setSpringVelocity();
+            springStatus = false;
+        } else {
+            setDefaultVelocity();
+        }
+        interactionStatus = false;
+    }
+
+    public void updateInteractionStatus(boolean springStatus) {
+        this.springStatus = springStatus;
+        this.interactionStatus = true;
+    }
+
+    public void updateImage(Image newImage) { curImage = newImage; }
+
+    public Image getCurImage() { return curImage; }
 }

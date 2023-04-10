@@ -1,30 +1,45 @@
 package com.example.doodle.controller;
 
-import com.example.doodle.DoodleJumpView;
+import com.example.doodle.view.DoodleJumpView;
 import com.example.doodle.model.DoodleJumpModel;
-import com.example.doodle.model.classes.PlatformsQueue;
+import com.example.doodle.model.classes.platforms.PlatformsQueue;
 import com.example.doodle.model.classes.Player;
 import com.example.doodle.model.classes.ScoreTable;
+import com.example.doodle.view.fxmlcontrollers.Source;
 import javafx.animation.AnimationTimer;
+import javafx.scene.input.KeyCode;
 
 import java.io.*;
 
-public class DoodleJumpPresenter {
+public class DoodleJumpController {
     private final DoodleJumpModel model;
     private final DoodleJumpView view;
 
-    DoodleJumpPresenter(DoodleJumpModel modelReference, DoodleJumpView viewReference) {
+    Player player;
+    PlatformsQueue platformsQueue;
+    ScoreTable scoreTable;
+
+    public DoodleJumpController(DoodleJumpModel modelReference, DoodleJumpView viewReference) {
         model = modelReference;
         view = viewReference;
+        scoreTable = new ScoreTable();
+        Source.addPlayer(this);
     }
 
     private boolean gameStatus = true;
 
-    public void run() throws IOException {
-        Player player = new Player();
-        PlatformsQueue platformsQueue = new PlatformsQueue();
-        ScoreTable scoreTable = new ScoreTable();
+    private void setDefaultSettings() {
+        view.setField();
         view.setPlayer();
+        model.setDefaultSettings();
+        gameStatus = true;
+    }
+
+    private void startGame() {
+        player = new Player();
+        platformsQueue = new PlatformsQueue();
+        setDefaultSettings();
+
         final AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -47,4 +62,22 @@ public class DoodleJumpPresenter {
         };
         timer.start();
     }
+
+
+    public <T> void listen(String message, T[] args) {
+        switch (message) {
+            case "StartPlay", "RestartGame" -> startGame();
+
+            case "OpenMenu" -> view.showMenu();
+
+            case "Score" -> view.openScoreTable();
+
+            case "Button" -> model.handleButton((KeyCode) args[0], player);
+        }
+    }
+
+    public void run() throws IOException {
+        view.showMenu();
+    }
+
 }

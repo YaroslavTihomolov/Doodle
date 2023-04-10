@@ -13,4 +13,12 @@ module com.example.doodle {
     opens com.example.doodle.model.classes to javafx.fxml;
     exports com.example.doodle.controller;
     opens com.example.doodle.controller to javafx.fxml;
+    exports com.example.doodle.view;
+    opens com.example.doodle.view to javafx.fxml;
+    exports com.example.doodle.view.fxmlcontrollers;
+    opens com.example.doodle.view.fxmlcontrollers to javafx.fxml;
+    exports com.example.doodle.model.classes.platforms;
+    opens com.example.doodle.model.classes.platforms to javafx.fxml;
+    exports com.example.doodle.model.classes.platforms.platformTypes;
+    opens com.example.doodle.model.classes.platforms.platformTypes to javafx.fxml;
 }

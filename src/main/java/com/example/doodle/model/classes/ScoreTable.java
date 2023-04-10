@@ -29,7 +29,11 @@ public class ScoreTable {
             }
         }
 
-        if (lines.size() > size) {
+        if (size < 10 && lines.size() == size) {
+            lines.add(Long.toString(resultScore));
+        }
+
+        if (size == 10 && lines.size() > size) {
             lines.remove(lines.size() - 1);
         }
     }
